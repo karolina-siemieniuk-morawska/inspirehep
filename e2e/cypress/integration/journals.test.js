@@ -38,12 +38,12 @@ describe('Journal Submission', () => {
 
   it('submits a new journal', () => {
     const formData = {
-      journal_title: 'Amazing Journal',
-      short_title: 'AJ'
+      short_title: 'AJ',
+      journal_title: { title: 'Amazing Journal' },
     };
     const expectedMetadata = {
-      journal_title: 'Amazing Journal',
-      short_title: 'AJ'
+      short_title: 'AJ',
+      journal_title: { title: 'Amazing Journal' },
     };
     cy.visit('/submissions/journals');
     cy.testSubmission({

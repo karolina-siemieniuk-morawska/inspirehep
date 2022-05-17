@@ -84,7 +84,7 @@ Cypress.Commands.add(
 
 Cypress.Commands.add('submitForm', (data) => {
   cy.fillForm(data);
-  cy.get('button[type=submit]').click();
+  cy.get('[data-test-id="submit-button"]').click().click()
 });
 
 Cypress.Commands.add('fillForm', (data) => {

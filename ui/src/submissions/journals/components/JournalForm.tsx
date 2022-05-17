@@ -9,7 +9,7 @@ export const JournalForm = () => <Form className="bg-white pa3">
   <Row className="mb3 pt2 bg-white">
     <Col span={24}>
       <Field name="short_title" label="* Short title" component={TextField} />
-      <Field name="journal_title" label="* Journal Title" component={TextField} />
+      <Field name="journal_title.title" label="* Journal Title" component={TextField} />
     </Col>
   </Row>
 

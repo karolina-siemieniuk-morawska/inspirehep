@@ -13,7 +13,7 @@ describe('jobs - async action creators', () => {
       mockHttp.reset();
     });
 
-    it('creates JOB_SUCCESS', async done => {
+    it('creates JOB_SUCCESS', async () => {
       mockHttp.onGet('/jobs/123').replyOnce(200, { foo: 'bar' });
 
       const expectedActions = [
@@ -24,10 +24,9 @@ describe('jobs - async action creators', () => {
       const store = getStore();
       await store.dispatch(fetchJob(123));
       expect(store.getActions()).toEqual(expectedActions);
-      done();
     });
 
-    it('creates JOB_ERROR', async done => {
+    it('creates JOB_ERROR', async () => {
       mockHttp.onGet('/jobs/123').replyOnce(500, { message: 'Error' });
 
       const expectedActions = [
@@ -44,7 +43,6 @@ describe('jobs - async action creators', () => {
       const store = getStore();
       await store.dispatch(fetchJob(123));
       expect(store.getActions()).toEqual(expectedActions);
-      done();
     });
   });
 });
