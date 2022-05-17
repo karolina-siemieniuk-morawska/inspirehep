@@ -49,7 +49,9 @@ services:
     restart: 'always'
   es:
     build:
-      context: docker/opensearch
+      context: opensearch/
+      dockerfile: 'opensearch.Dockerfile'
+    restart: always
     restart: 'always'
     environment:
       - cluster.name=opensearch-cluster
