@@ -17,12 +17,14 @@ function PublicationsSelect({
     if (!canClaim) {
       onSelectPapersUserCanNotClaim(event);
     }
-    if (claimed) {
+    if (claimed && canClaim) {
       onSelectClaimedPapers(event);
-    } else if (!claimed && canClaim) {
+    }
+    if (!claimed) {
       onSelectUnclaimedPapers(event);
     }
   };
+
   return (
     <Checkbox
       onChange={(event) => {
