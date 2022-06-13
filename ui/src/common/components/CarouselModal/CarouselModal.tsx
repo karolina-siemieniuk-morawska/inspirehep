@@ -1,0 +1,164 @@
+import React, { useCallback, useState, useMemo, forwardRef } from 'react';
+import PropTypes from 'prop-types';
+// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'reac... Remove this comment to see the full error message
+import Modal from 'react-modal';
+import { Carousel, Row, Col, Button } from 'antd';
+
+import './CarouselModal.scss';
+import { LeftOutlined, RightOutlined, CloseOutlined } from '@ant-design/icons';
+import useRefOrThis from '../../hooks/useRefOrThis';
+import { useGlobalEvent } from '../../hooks/useGlobalEvent';
+import useResponsiveCheck from '../../hooks/useResponsiveCheck';
+
+const CarouselModal = forwardRef(
+  // @ts-expect-error ts-migrate(2339) FIXME: Property 'visible' does not exist on type '{ child... Remove this comment to see the full error message
+  ({ children, visible = false, onCancel }, ref) => {
+    // FIXME: better way to use `default` ref
+    const carouselRef = useRefOrThis(ref);
+    const isMobile = useResponsiveCheck({ max: 'md' });
+
+    const rootElement = useMemo(() => document.getElementById('root'), []);
+    const carouselLastIndex = React.Children.count(children) - 1;
+    const [carouselIndex, setCarouselIndex] = useState(0);
+
+    const onNextClick = useCallback(
+      () => {
+        carouselRef.current.next();
+      },
+      [carouselRef]
+    );
+    const onPreviousClick = useCallback(
+      () => {
+        carouselRef.current.prev();
+      },
+      [carouselRef]
+    );
+    const onCourselIndexChange = useCallback((_, newIndex) => {
+      setCarouselIndex(newIndex);
+    }, []);
+    const onModalClose = useCallback(
+      () => {
+        onCancel();
+        carouselRef.current.goTo(0, true);
+        setCarouselIndex(0); // `beforeChange` is not triggered for `goTo`
+      },
+      [onCancel, carouselRef]
+    );
+    const onModalContentClick = useCallback(
+      event => {
+        // HACK: close modal on click outside of real carousel content
+        const clickOutOfCarouselTrack = event.target === event.currentTarget;
+        const clickInCourselTrackButOutOfCurrentSlide = event.target.classList.contains(
+          'slick-track'
+        );
+        if (
+          clickOutOfCarouselTrack ||
+          clickInCourselTrackButOutOfCurrentSlide
+        ) {
+          onModalClose();
+        }
+      },
+      [onModalClose]
+    );
+    useGlobalEvent('keydown', (event: any) => {
+      if (!visible) {
+        return;
+      }
+
+      switch (event.key) {
+        case 'ArrowLeft':
+          onPreviousClick();
+          break;
+        case 'ArrowRight':
+          onNextClick();
+          break;
+        case 'Tab':
+          onNextClick();
+          break;
+        default:
+          break;
+      }
+    });
+
+    return (
+      // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
+      <Modal
+        appElement={rootElement}
+        isOpen={visible} // TODO: animate on visibility change?
+        className="__CarouselModal__ h-100"
+        overlayClassName="__CarouselModal__overlay"
+        bodyOpenClassName="__CarouselModal__body-open"
+        onRequestClose={onModalClose}
+        shouldCloseOnOverlayClick
+        shouldCloseOnEsc
+      >
+        // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
+        <Button
+          className="action close"
+          onClick={onModalClose}
+          type="primary"
+          size="large"
+          // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
+          icon={<CloseOutlined />}
+        />
+        {!isMobile && (
+          // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
+          <Button
+            className="action previous"
+            disabled={carouselIndex === 0}
+            onClick={onPreviousClick}
+            type="primary"
+            size="large"
+            // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
+            icon={<LeftOutlined />}
+          />
+        )}
+        // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
+        <Row
+          className="h-100"
+          onClick={onModalContentClick}
+          justify="center"
+          align="middle"
+        >
+          // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
+          <Col className="carousel-container" xs={24} md={20} lg={18} xxl={12}>
+            // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
+            <Carousel
+              className="carousel"
+              infinite={false}
+              ref={carouselRef}
+              lazyLoad="progressive"
+              adaptiveHeight
+              beforeChange={onCourselIndexChange}
+            >
+              {children}
+            </Carousel>
+          </Col>
+        </Row>
+        {!isMobile && (
+          // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
+          <Button
+            className="action next"
+            disabled={carouselIndex === carouselLastIndex}
+            onClick={onNextClick}
+            type="primary"
+            size="large"
+            // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
+            icon={<RightOutlined />}
+          />
+        )}
+      </Modal>
+    );
+  }
+);
+
+CarouselModal.propTypes = {
+  // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: PropTypes.Requireable<PropTypes.... Remove this comment to see the full error message
+  children: PropTypes.node,
+  visible: PropTypes.bool,
+  onCancel: PropTypes.func,
+};
+
+CarouselModal.displayName = 'CarouselModal';
+
+export default CarouselModal;

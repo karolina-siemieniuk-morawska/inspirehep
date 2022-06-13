@@ -4,7 +4,9 @@ import { EditOutlined } from '@ant-design/icons';
 
 import ListItemAction from './ListItemAction';
 import IconText from './IconText';
+// @ts-expect-error ts-migrate(6142) FIXME: Module './EventTracker' was resolved to '/Users/ka... Remove this comment to see the full error message
 import EventTracker from './EventTracker';
+// @ts-expect-error ts-migrate(6142) FIXME: Module './ExternalLink' was resolved to '/Users/ka... Remove this comment to see the full error message
 import ExternalLink from './ExternalLink';
 
 import {
@@ -45,9 +47,13 @@ export default function EditRecordAction({
       : pidTypeToEditRoutePrefix[pidType];
 
   return (
+    // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
     <ListItemAction>
+      // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
       <EventTracker eventId="Edit">
+        // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         <ExternalLink href={`${pidTypeRoute}/${pidValue}`}>
+          // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
           <IconText text="edit" icon={<EditOutlined />} />
         </ExternalLink>
       </EventTracker>

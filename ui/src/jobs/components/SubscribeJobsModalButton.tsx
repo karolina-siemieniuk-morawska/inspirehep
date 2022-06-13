@@ -1,0 +1,138 @@
+import React, { Component } from 'react';
+import { MailOutlined } from '@ant-design/icons';
+import { Modal, Alert, Typography } from 'antd';
+// @ts-expect-error ts-migrate(6142) FIXME: Module '../../common/components/LinkLikeButton' wa... Remove this comment to see the full error message
+import LinkLikeButton from '../../common/components/LinkLikeButton';
+// @ts-expect-error ts-migrate(6142) FIXME: Module '../../common/components/ResponsiveView' wa... Remove this comment to see the full error message
+import ResponsiveView from '../../common/components/ResponsiveView';
+import subscribeJobMailingList from '../subscribeJobMailingList';
+// @ts-expect-error ts-migrate(6142) FIXME: Module '../../common/components/ModalSuccessResult... Remove this comment to see the full error message
+import ModalSuccessResult from '../../common/components/ModalSuccessResult';
+// @ts-expect-error ts-migrate(6142) FIXME: Module './SubscribeJobsForm' was resolved to '/Use... Remove this comment to see the full error message
+import SubscribeJobsForm from './SubscribeJobsForm';
+
+const MODAL_AUTO_CLOSE_TIMEOUT_AFTER_SUBMISSION = 4000;
+
+export default class SubscribeJobsModalButton extends Component {
+  static renderConfirmation() {
+    return (
+      // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
+      <ModalSuccessResult>
+        // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
+        <Typography.Paragraph>
+          You have successfully subscribed!
+        </Typography.Paragraph>
+        // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
+        <Typography.Paragraph>
+          You will receive a weekly update on new INSPIRE job listings every
+          Monday.
+        </Typography.Paragraph>
+      </ModalSuccessResult>
+    );
+  }
+
+  constructor(props: any) {
+    super(props);
+
+    this.state = {
+      isModalVisible: false,
+      hasError: false,
+      isSubscriptionSubmitted: false,
+    };
+
+    this.onClick = this.onClick.bind(this);
+    this.onModalCancel = this.onModalCancel.bind(this);
+    this.onFormSubmit = this.onFormSubmit.bind(this);
+    this.afterModalCloase = this.afterModalCloase.bind(this);
+  }
+
+  onModalCancel() {
+    this.setState({ isModalVisible: false });
+  }
+
+  onClick() {
+    this.setState({ isModalVisible: true });
+  }
+
+  async onFormSubmit(data: any) {
+    try {
+      await subscribeJobMailingList(data);
+      this.setState({ hasError: false, isSubscriptionSubmitted: true });
+
+      setTimeout(() => {
+        this.setState({ isModalVisible: false });
+      }, MODAL_AUTO_CLOSE_TIMEOUT_AFTER_SUBMISSION);
+    } catch (error) {
+      this.setState({ hasError: true });
+    }
+  }
+
+  afterModalCloase() {
+    this.setState({
+      isSubscriptionSubmitted: false,
+    });
+  }
+
+  renderSubscribeForm() {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'hasError' does not exist on type 'Readon... Remove this comment to see the full error message
+    const { hasError } = this.state;
+    return (
+      // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
+      <div>
+        {hasError && (
+          // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
+          <div className="mb3">
+            // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
+            <Alert
+              type="error"
+              showIcon
+              description="Could not subscribe, please try again."
+            />
+          </div>
+        )}
+        // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
+        <div className="mb3">
+          To be notified via email of new jobs in High Energy Physics, please
+          fill in the following information:
+        </div>
+        // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
+        <SubscribeJobsForm onSubmit={this.onFormSubmit} />
+      </div>
+    );
+  }
+
+  render() {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'isModalVisible' does not exist on type '... Remove this comment to see the full error message
+    const { isModalVisible, isSubscriptionSubmitted } = this.state;
+    return (
+      // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
+      <>
+        // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
+        <LinkLikeButton onClick={this.onClick}>
+          // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
+          <MailOutlined />
+          // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
+          <ResponsiveView
+            min="sm"
+            render={() => (
+              // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
+              <span className="pl1">Subscribe to mailing list</span>
+            )}
+          />
+        </LinkLikeButton>
+        // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
+        <Modal
+          title="Subscribe to the INSPIRE job mailing list"
+          visible={isModalVisible}
+          afterClose={this.afterModalCloase}
+          onCancel={this.onModalCancel}
+          footer={null}
+        >
+          {isSubscriptionSubmitted
+            ? SubscribeJobsModalButton.renderConfirmation()
+            : this.renderSubscribeForm()}
+        </Modal>
+      </>
+    );
+  }
+}

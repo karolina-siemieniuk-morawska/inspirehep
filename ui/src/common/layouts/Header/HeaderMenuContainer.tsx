@@ -1,0 +1,21 @@
+// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'reac... Remove this comment to see the full error message
+import { connect } from 'react-redux';
+
+import { userLogout } from '../../../actions/user';
+import { isCataloger } from '../../authorization';
+// @ts-expect-error ts-migrate(6142) FIXME: Module './HeaderMenu' was resolved to '/Users/karo... Remove this comment to see the full error message
+import HeaderMenu from './HeaderMenu';
+
+const stateToProps = (state: any) => ({
+  loggedIn: state.user.get('loggedIn'),
+  isCatalogerLoggedIn: isCataloger(state.user.getIn(['data', 'roles'])),
+  profileControlNumber: state.user.getIn(['data', 'profile_control_number'])
+});
+
+const dispatchToProps = (dispatch: any) => ({
+  onLogoutClick() {
+    dispatch(userLogout());
+  }
+});
+
+export default connect(stateToProps, dispatchToProps)(HeaderMenu);

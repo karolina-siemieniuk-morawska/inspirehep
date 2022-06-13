@@ -36,7 +36,9 @@ export default class DrawerHandle extends Component<
     const { children, drawerTitle, width, handleText, className } = this.props;
     const { isDrawerVisible } = this.state;
     return (
+      // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
       <>
+        // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         <Button
           data-test-id="handle-button"
           className={className}
@@ -44,6 +46,7 @@ export default class DrawerHandle extends Component<
         >
           {handleText}
         </Button>
+        // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         <Drawer
           title={drawerTitle}
           placement="left"
