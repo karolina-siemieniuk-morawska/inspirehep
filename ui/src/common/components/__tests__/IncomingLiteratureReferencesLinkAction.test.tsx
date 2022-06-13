@@ -1,8 +1,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+// @ts-expect-error ts-migrate(6142) FIXME: Module '../IncomingLiteratureReferencesLinkAction'... Remove this comment to see the full error message
 import IncomingLiteratureReferencesLinkAction from '../IncomingLiteratureReferencesLinkAction';
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('IncomingLiteratureReferencesLinkAction', () => {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('renders with required props', () => {
     const itemCount = 29;
     const referenceType = 'citation';
@@ -10,6 +13,7 @@ describe('IncomingLiteratureReferencesLinkAction', () => {
     const linkQuery = `refersto:recid:${recordId}`;
     const trackerEventId = 'Citations:Search';
     const wrapper = shallow(
+      // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
       <IncomingLiteratureReferencesLinkAction
         itemCount={itemCount}
         linkQuery={linkQuery}
@@ -17,9 +21,11 @@ describe('IncomingLiteratureReferencesLinkAction', () => {
         trackerEventId={trackerEventId}
       />
     );
+    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
     expect(wrapper).toMatchSnapshot();
   });
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('renders with required props when reference count is singular', () => {
     const itemCount = 1;
     const referenceType = 'paper';
@@ -27,6 +33,7 @@ describe('IncomingLiteratureReferencesLinkAction', () => {
     const linkQuery = `refersto:recid:${recordId}`;
     const trackerEventId = 'Papers:Search';
     const wrapper = shallow(
+      // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
       <IncomingLiteratureReferencesLinkAction
         itemCount={itemCount}
         linkQuery={linkQuery}
@@ -34,6 +41,7 @@ describe('IncomingLiteratureReferencesLinkAction', () => {
         trackerEventId={trackerEventId}
       />
     );
+    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
     expect(wrapper).toMatchSnapshot();
   });
 });

@@ -2,18 +2,26 @@ import React, { useCallback, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Input, AutoComplete } from 'antd';
 import { HistoryOutlined } from '@ant-design/icons';
+// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'clas... Remove this comment to see the full error message
 import classNames from 'classnames';
 import './SearchBox.scss';
+// @ts-expect-error ts-migrate(6142) FIXME: Module '../../containers/SearchScopeSelectContaine... Remove this comment to see the full error message
 import SearchScopeSelectContainer from '../../containers/SearchScopeSelectContainer';
 import { readHistory, persistHistory } from './searchHistory';
 import IconText from '../IconText';
 
 let HISTORY_BY_NAMESPACE = {};
-readHistory(history => {
+readHistory((history: any) => {
   HISTORY_BY_NAMESPACE = history;
 });
 
-function SearchBox({ value, placeholder, onSearch, namespace, className }) {
+function SearchBox({
+  value,
+  placeholder,
+  onSearch,
+  namespace,
+  className
+}: any) {
   const [inputValue, setInputValue] = useState(value);
   const [autoCompleteOptions, setAutoCompleteOptions] = useState([]);
   const [shouldSearch, setShouldSearch] = useState(false);
@@ -31,14 +39,17 @@ function SearchBox({ value, placeholder, onSearch, namespace, className }) {
     event => {
       const newValue = event.target.value;
       setInputValue(newValue);
+      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       const namespaceHistory = HISTORY_BY_NAMESPACE[namespace];
+      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       if (newValue && HISTORY_BY_NAMESPACE[namespace]) {
         const options = namespaceHistory
-          .filter(searchQuery => searchQuery.includes(newValue))
-          .map(searchQuery => ({
-            value: searchQuery,
-            label: <IconText icon={<HistoryOutlined />} text={searchQuery} />,
-          }));
+          .filter((searchQuery: any) => searchQuery.includes(newValue))
+          .map((searchQuery: any) => ({
+          value: searchQuery,
+          // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
+          label: <IconText icon={<HistoryOutlined />} text={searchQuery} />
+        }));
         setAutoCompleteOptions(options);
       } else {
         setAutoCompleteOptions([]);
@@ -64,6 +75,7 @@ function SearchBox({ value, placeholder, onSearch, namespace, className }) {
         onSearch(namespace, inputValue);
 
         if (inputValue) {
+          // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
           HISTORY_BY_NAMESPACE[namespace].add(inputValue.trim());
           persistHistory(HISTORY_BY_NAMESPACE);
         }
@@ -78,10 +90,14 @@ function SearchBox({ value, placeholder, onSearch, namespace, className }) {
     // HACK: autocomplete select and scope select interferes with each other
     // when search scope is rendered using `Input.addonBefore` prop, inside autocomplete
     // that's why it's pulled out, and classNames are set manually to make it look like an addon
+    // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
     <span className={classNames('__SearchBox__ ant-input-group', className)}>
+      // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
       <span className="ant-input-group-addon">
+        // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         <SearchScopeSelectContainer />
       </span>
+      // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
       <AutoComplete
         autoFocus
         dropdownClassName="header-dropdown"
@@ -91,6 +107,7 @@ function SearchBox({ value, placeholder, onSearch, namespace, className }) {
         options={autoCompleteOptions}
         onSelect={onAutoCompleteSelect}
       >
+        // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         <Input.Search
           data-test-id="search-box-input"
           placeholder={placeholder}

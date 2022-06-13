@@ -1,3 +1,4 @@
+// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { connect } from 'react-redux';
 
 import {
@@ -9,13 +10,22 @@ import {
   assignOwnPapers,
   clearPublicationsUnclaimedSelection,
 } from '../../actions/authors';
+// @ts-expect-error ts-migrate(6142) FIXME: Module '../components/AssignOwnProfileAction' was ... Remove this comment to see the full error message
 import AssignOwnProfileAction from '../components/AssignOwnProfileAction';
 
 export const dispatchToProps = (
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'dispatch' implicitly has an 'any' type.
   dispatch,
-  { recordId, disabledAssignAction }
+  {
+    recordId,
+    disabledAssignAction
+  }: any
 ) => ({
-  onAssign({ from, to, isUnassignAction }) {
+  onAssign({
+    from,
+    to,
+    isUnassignAction
+  }: any) {
     dispatch(clearPublicationSelection());
     dispatch(clearPublicationsClaimedSelection());
     dispatch(clearPublicationsUnclaimedSelection());
@@ -26,7 +36,7 @@ export const dispatchToProps = (
       dispatch(setPublicationsUnclaimedSelection([recordId], true));
     }
     dispatch(assignOwnPapers({ from, to, isUnassignAction }));
-  },
+  }
 });
 
 export default connect(null, dispatchToProps)(AssignOwnProfileAction);

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { connect } from 'react-redux';
 import { Map } from 'immutable';
 
@@ -8,17 +9,21 @@ import {
   submitUpdate,
 } from '../../../actions/submissions';
 import { JOBS_PID_TYPE } from '../../../common/constants';
+// @ts-expect-error ts-migrate(6142) FIXME: Module '../components/JobSubmission' was resolved ... Remove this comment to see the full error message
 import JobSubmission from '../components/JobSubmission';
+// @ts-expect-error ts-migrate(6142) FIXME: Module '../../../common/components/LoadingOrChildr... Remove this comment to see the full error message
 import LoadingOrChildren from '../../../common/components/LoadingOrChildren';
+// @ts-expect-error ts-migrate(6142) FIXME: Module '../../common/components/SubmissionPage' wa... Remove this comment to see the full error message
 import SubmissionPage from '../../common/components/SubmissionPage';
+// @ts-expect-error ts-migrate(6142) FIXME: Module '../../../common/components/ErrorAlertOrChi... Remove this comment to see the full error message
 import ErrorAlertOrChildren from '../../../common/components/ErrorAlertOrChildren';
 
 class JobUpdateSubmissionPage extends Component {
-  static getRecordIdFromProps(props) {
+  static getRecordIdFromProps(props: any) {
     return props.match.params.id;
   }
 
-  constructor(props) {
+  constructor(props: any) {
     super(props);
     this.onSubmit = this.onSubmit.bind(this);
   }
@@ -27,7 +32,7 @@ class JobUpdateSubmissionPage extends Component {
     this.dispatch(fetchUpdateFormData(JOBS_PID_TYPE, this.recordId));
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: any) {
     const prevRecordId = JobUpdateSubmissionPage.getRecordIdFromProps(
       prevProps
     );
@@ -36,11 +41,12 @@ class JobUpdateSubmissionPage extends Component {
     }
   }
 
-  async onSubmit(formData) {
+  async onSubmit(formData: any) {
     await this.dispatch(submitUpdate(JOBS_PID_TYPE, this.recordId, formData));
   }
 
   get dispatch() {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'dispatch' does not exist on type 'Readon... Remove this comment to see the full error message
     const { dispatch } = this.props;
     return dispatch;
   }
@@ -51,18 +57,26 @@ class JobUpdateSubmissionPage extends Component {
 
   render() {
     const {
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'error' does not exist on type 'Readonly<... Remove this comment to see the full error message
       error,
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'updateFormData' does not exist on type '... Remove this comment to see the full error message
       updateFormData,
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'loadingUpdateFormData' does not exist on... Remove this comment to see the full error message
       loadingUpdateFormData,
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'updateFormDataError' does not exist on t... Remove this comment to see the full error message
       updateFormDataError,
     } = this.props;
     return (
+      // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
       <SubmissionPage
         title="Update a job opening"
         description="All modifications will appear immediately."
       >
+        // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         <LoadingOrChildren loading={loadingUpdateFormData}>
+          // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
           <ErrorAlertOrChildren error={updateFormDataError}>
+            // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             <JobSubmission
               error={error}
               onSubmit={this.onSubmit}
@@ -75,22 +89,28 @@ class JobUpdateSubmissionPage extends Component {
   }
 }
 
+// @ts-expect-error ts-migrate(2339) FIXME: Property 'propTypes' does not exist on type 'typeo... Remove this comment to see the full error message
 JobUpdateSubmissionPage.propTypes = {
   match: PropTypes.objectOf(PropTypes.any).isRequired,
   dispatch: PropTypes.func.isRequired,
+  // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'typeof Map' is not assignable to... Remove this comment to see the full error message
   error: PropTypes.instanceOf(Map),
+  // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'typeof Map' is not assignable to... Remove this comment to see the full error message
   updateFormData: PropTypes.instanceOf(Map),
+  // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'typeof Map' is not assignable to... Remove this comment to see the full error message
   updateFormDataError: PropTypes.instanceOf(Map),
   loadingUpdateFormData: PropTypes.bool.isRequired,
 };
 
-const stateToProps = state => ({
+const stateToProps = (state: any) => ({
   error: state.submissions.get('submitError'),
   updateFormData: state.submissions.get('initialData'),
   updateFormDataError: state.submissions.get('initialDataError'),
-  loadingUpdateFormData: state.submissions.get('loadingInitialData'),
+  loadingUpdateFormData: state.submissions.get('loadingInitialData')
 });
 
-const dispatchToProps = dispatch => ({ dispatch });
+const dispatchToProps = (dispatch: any) => ({
+  dispatch
+});
 
 export default connect(stateToProps, dispatchToProps)(JobUpdateSubmissionPage);

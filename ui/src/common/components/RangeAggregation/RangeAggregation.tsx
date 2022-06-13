@@ -1,13 +1,16 @@
 import React, { useMemo, useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
+// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { FlexibleWidthXYPlot, VerticalRectSeries, Hint } from 'react-vis';
 import { Slider } from 'antd';
 import { List } from 'immutable';
 import { MathInterval } from 'math-interval-2';
 
 import { pluckMinMaxPair, toNumbers, addCommasToNumber } from '../../utils';
+// @ts-expect-error ts-migrate(6142) FIXME: Module '../AggregationBox' was resolved to '/Users... Remove this comment to see the full error message
 import AggregationBox from '../AggregationBox';
-import styleVariables from '../../../styleVariables';
+// @ts-expect-error ts-migrate(2306) FIXME: File '/Users/karolinasiemieniuk-morawska/repos/CER... Remove this comment to see the full error message
+import styleVariables from '../../../styleVariables.ts';
 import './RangeAggregation.scss';
 import { RANGE_AGGREGATION_SELECTION_SEPARATOR } from '../../constants';
 
@@ -25,9 +28,10 @@ const DESELECTED_COLOR = styleVariables['gray-6'];
 const MIN_DISPLAY_RANGE_SIZE = 30;
 const HEIGHT = 100;
 
-function getInitialHistogramData(initialBuckets, [min, max]) {
+// @ts-expect-error ts-migrate(7031) FIXME: Binding element 'min' implicitly has an 'any' type... Remove this comment to see the full error message
+function getInitialHistogramData(initialBuckets: any, [min, max]) {
   const data = initialBuckets
-    .map(item => {
+    .map((item: any) => {
       const key = Number(item.get(KEY_PROP_NAME));
       return {
         x0: key - HALF_BAR_WIDTH,
@@ -50,9 +54,10 @@ function getInitialHistogramData(initialBuckets, [min, max]) {
   return data;
 }
 
-function getHistogramData(initialData, keyToCountForBuckets, [lower, upper]) {
+// @ts-expect-error ts-migrate(7031) FIXME: Binding element 'lower' implicitly has an 'any' ty... Remove this comment to see the full error message
+function getHistogramData(initialData: any, keyToCountForBuckets: any, [lower, upper]) {
   const endpointsInterval = MathInterval.closed(lower, upper);
-  const data = initialData.map(item => {
+  const data = initialData.map((item: any) => {
     const { x0, x } = item;
     const bucketKey = x - HALF_BAR_WIDTH;
     const color = endpointsInterval.contains(bucketKey)
@@ -68,18 +73,19 @@ function getHistogramData(initialData, keyToCountForBuckets, [lower, upper]) {
   return data;
 }
 
-function pluckMinMaxPairFromBuckets(buckets) {
-  return pluckMinMaxPair(buckets, bucket => Number(bucket.get(KEY_PROP_NAME)));
+function pluckMinMaxPairFromBuckets(buckets: any) {
+  return pluckMinMaxPair(buckets, (bucket: any) => Number(bucket.get(KEY_PROP_NAME)));
 }
 
-function getKeyToCountMapFromBuckets(buckets) {
-  return buckets.reduce((map, item) => {
+function getKeyToCountMapFromBuckets(buckets: any) {
+  return buckets.reduce((map: any, item: any) => {
     map[item.get(KEY_PROP_NAME)] = item.get(COUNT_PROP_NAME);
     return map;
   }, {});
 }
 
-function sanitizeEndpoints(endpoints, [min, max]) {
+// @ts-expect-error ts-migrate(7031) FIXME: Binding element 'min' implicitly has an 'any' type... Remove this comment to see the full error message
+function sanitizeEndpoints(endpoints: any, [min, max]) {
   let [lower, upper] = endpoints;
   const bounds = MathInterval.closed(min, max);
   if (lower === undefined || !bounds.contains(lower)) {
@@ -91,13 +97,14 @@ function sanitizeEndpoints(endpoints, [min, max]) {
   return [lower, upper];
 }
 
-function getSanitizedEndpointsFromSelections(selections, minMaxPair) {
+function getSanitizedEndpointsFromSelections(selections: any, minMaxPair: any) {
   const selectionsAsString =
     selections && selections.split(RANGE_AGGREGATION_SELECTION_SEPARATOR);
   const unsafeEndpoints = toNumbers(selectionsAsString) || [];
   return sanitizeEndpoints(unsafeEndpoints, minMaxPair);
 }
 
+// @ts-expect-error ts-migrate(7031) FIXME: Binding element 'lower' implicitly has an 'any' ty... Remove this comment to see the full error message
 function getSliderMarks([lower, upper], [min, max]) {
   const totalRange = max - min;
   const selectionRange = upper - lower;
@@ -135,8 +142,8 @@ function RangeAggregation({
   initialBuckets,
   buckets,
   selections,
-  onChange,
-}) {
+  onChange
+}: any) {
   const [hoveredBar, setHoveredBar] = useState(null);
 
   const [initialMin, initialMax] = useMemo(
@@ -167,6 +174,7 @@ function RangeAggregation({
     sliderEndpointsFromProps
   );
   const sliderMarks = useMemo(
+    // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'any[]' is not assignable to para... Remove this comment to see the full error message
     () => getSliderMarks(sliderEndpoints, [initialMin, initialFakeMax]),
     [sliderEndpoints, initialMin, initialFakeMax]
   );
@@ -175,6 +183,7 @@ function RangeAggregation({
     [buckets]
   );
   const dataFromProps = useMemo(
+    // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'any[]' is not assignable to para... Remove this comment to see the full error message
     () => getHistogramData(initialData, keyToCountForBuckets, sliderEndpoints),
     [initialData, keyToCountForBuckets, sliderEndpoints]
   );
@@ -201,6 +210,7 @@ function RangeAggregation({
         getHistogramData(
           initialData,
           keyToCountForBuckets,
+          // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'any[]' is not assignable to para... Remove this comment to see the full error message
           sanitizedSliderEndpoints
         )
       );
@@ -225,9 +235,13 @@ function RangeAggregation({
   );
 
   return (
+    // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
     <AggregationBox name={name}>
+      // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
       <div className="__RangeAggregation__">
+        // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         <FlexibleWidthXYPlot height={HEIGHT} margin={NO_MARGIN}>
+          // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
           <VerticalRectSeries
             className="pointer"
             colorType="literal"
@@ -237,10 +251,13 @@ function RangeAggregation({
             onValueMouseOut={onBarMouseOut}
           />
           {hoveredBar && (
+            // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             <Hint
               value={hoveredBar}
               align={{ vertical: 'top', horizontal: 'auto' }}
-              format={({ x }) => {
+              format={({
+                x
+              }: any) => {
                 const bucketKey = x - HALF_BAR_WIDTH;
                 const count = keyToCountForBuckets[bucketKey] || 0;
                 const initialCount =
@@ -260,6 +277,7 @@ function RangeAggregation({
               }}
             />
           )}
+          // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
           <VerticalRectSeries
             className="pointer highlight-bar-on-hover"
             colorType="literal"
@@ -269,10 +287,12 @@ function RangeAggregation({
             onValueMouseOut={onBarMouseOut}
           />
         </FlexibleWidthXYPlot>
+        // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         <Slider
           range
           onChange={onSliderChange}
           onAfterChange={onSliderAfterChange}
+          // @ts-expect-error ts-migrate(2322) FIXME: Type 'any[]' is not assignable to type 'SliderValu... Remove this comment to see the full error message
           value={sliderEndpoints}
           min={initialMin}
           max={initialFakeMax}
@@ -289,7 +309,9 @@ RangeAggregation.propTypes = {
   onChange: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
   selections: PropTypes.string,
+  // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'typeof List' is not assignable t... Remove this comment to see the full error message
   buckets: PropTypes.instanceOf(List),
+  // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'typeof List' is not assignable t... Remove this comment to see the full error message
   initialBuckets: PropTypes.instanceOf(List),
 };
 

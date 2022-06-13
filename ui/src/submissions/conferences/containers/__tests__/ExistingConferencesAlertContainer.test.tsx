@@ -1,23 +1,30 @@
 import React from 'react';
 import { mount } from 'enzyme';
+// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { Provider } from 'react-redux';
 import { fromJS } from 'immutable';
 
+// @ts-expect-error ts-migrate(6142) FIXME: Module '../ExistingConferencesAlertContainer' was ... Remove this comment to see the full error message
 import ExistingConferencesAlertContainer from '../ExistingConferencesAlertContainer';
 import { EXISTING_CONFERENCES_NS } from '../../../../search/constants';
 import { SEARCH_QUERY_UPDATE } from '../../../../actions/actionTypes';
 import { getStore, getStoreWithState } from '../../../../fixtures/store';
 import { RANGE_AGGREGATION_SELECTION_SEPARATOR } from '../../../../common/constants';
+// @ts-expect-error ts-migrate(6142) FIXME: Module '../../components/ExistingConferencesAlert'... Remove this comment to see the full error message
 import ExistingConferencesAlert from '../../components/ExistingConferencesAlert';
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('ExistingConferencesAlertContainer', () => {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('dispatches SEARCH_QUERY_UPDATE initially', () => {
     const startingDate = '2020-01-24';
     const closingDate = '2020-09-20';
     const store = getStore();
     const namespace = EXISTING_CONFERENCES_NS;
     mount(
+      // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
       <Provider store={store}>
+        // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         <ExistingConferencesAlertContainer
           dates={[startingDate, closingDate]}
         />
@@ -34,16 +41,20 @@ describe('ExistingConferencesAlertContainer', () => {
         },
       },
     ];
+    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
     expect(store.getActions()).toEqual(expectedActions);
   });
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('dispatches SEARCH_QUERY_UPDATE onDatesChange', () => {
     const initialStartingDate = '2020-01-24';
     const initialClosingDate = '2020-09-20';
     const store = getStore();
     const namespace = EXISTING_CONFERENCES_NS;
     const wrapper = mount(
+      // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
       <Provider store={store}>
+        // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         <ExistingConferencesAlertContainer
           dates={[initialStartingDate, initialClosingDate]}
         />
@@ -69,9 +80,11 @@ describe('ExistingConferencesAlertContainer', () => {
         },
       },
     ];
+    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
     expect(store.getActions()).toEqual(expectedActions);
   });
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('passes numberOfConferences', () => {
     const startingDate = '2020-01-24';
     const closingDate = '2020-09-20';
@@ -85,12 +98,15 @@ describe('ExistingConferencesAlertContainer', () => {
       }),
     });
     const wrapper = mount(
+      // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
       <Provider store={store}>
+        // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         <ExistingConferencesAlertContainer
           dates={[startingDate, closingDate]}
         />
       </Provider>
     );
+    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
     expect(wrapper.find(ExistingConferencesAlert)).toHaveProp({
       numberOfConferences: 5,
     });

@@ -4,13 +4,17 @@ import { Menu, Dropdown } from 'antd';
 
 class DropdownMenu extends Component {
   renderMenu() {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'onClick' does not exist on type 'Readonl... Remove this comment to see the full error message
     const { children, onClick } = this.props;
+    // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
     return <Menu onClick={onClick}>{children}</Menu>;
   }
 
   render() {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'title' does not exist on type 'Readonly<... Remove this comment to see the full error message
     const { title, disabled, overlayClassName } = this.props;
     return (
+      // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
       <Dropdown
         disabled={disabled}
         overlay={this.renderMenu()}
@@ -22,6 +26,7 @@ class DropdownMenu extends Component {
   }
 }
 
+// @ts-expect-error ts-migrate(2339) FIXME: Property 'propTypes' does not exist on type 'typeo... Remove this comment to see the full error message
 DropdownMenu.propTypes = {
   children: PropTypes.node.isRequired,
   title: PropTypes.node.isRequired,
@@ -30,6 +35,7 @@ DropdownMenu.propTypes = {
   overlayClassName: PropTypes.string,
 };
 
+// @ts-expect-error ts-migrate(2339) FIXME: Property 'defaultProps' does not exist on type 'ty... Remove this comment to see the full error message
 DropdownMenu.defaultProps = {
   disabled: false,
 };

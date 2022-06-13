@@ -9,7 +9,7 @@ import SecondaryButton from './SecondaryButton';
 import { getAuthorName } from '../utils';
 
 class AuthorList extends Component {
-  constructor(props) {
+  constructor(props: any) {
     super(props);
     this.onModalCancel = this.onModalCancel.bind(this);
     this.onModalOpen = this.onModalOpen.bind(this);
@@ -28,23 +28,30 @@ class AuthorList extends Component {
   }
 
   renderShowAllOrEtAl() {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'enableShowAll' does not exist on type 'R... Remove this comment to see the full error message
     const { enableShowAll, authors } = this.props;
     if (enableShowAll) {
       return (
+        // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         <div className="di pl1">
+          // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
           <SecondaryButton onClick={this.onModalOpen}>
             Show All({authors.size})
           </SecondaryButton>
         </div>
       );
     }
+    // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
     return <span> et al.</span>;
   }
 
-  renderAuthorList(authorsToDisplay, displayShowAll = true) {
+  renderAuthorList(authorsToDisplay: any, displayShowAll = true) {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'authors' does not exist on type 'Readonl... Remove this comment to see the full error message
     const { authors, limit, wrapperClassName } = this.props;
     return (
+      // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
       <InlineList
+        // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
         wrapperClassName={wrapperClassName}
         items={authorsToDisplay}
         suffix={
@@ -53,18 +60,23 @@ class AuthorList extends Component {
             : null
         }
         extractKey={getAuthorName}
-        renderItem={author => <Author author={author} />}
+        // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
+        renderItem={(author: any) => <Author author={author} />}
       />
     );
   }
 
   render() {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'modalVisible' does not exist on type 'Re... Remove this comment to see the full error message
     const { modalVisible } = this.state;
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'authors' does not exist on type 'Readonl... Remove this comment to see the full error message
     const { authors, limit, total } = this.props;
     const showTotal = total === -1 ? authors.size : total;
     return (
+      // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
       <Fragment>
         {this.renderAuthorList(authors.take(limit))}
+        // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         <Modal
           title={`${showTotal} authors`}
           width="50%"
@@ -79,7 +91,9 @@ class AuthorList extends Component {
   }
 }
 
+// @ts-expect-error ts-migrate(2339) FIXME: Property 'propTypes' does not exist on type 'typeo... Remove this comment to see the full error message
 AuthorList.propTypes = {
+  // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'typeof List' is not assignable t... Remove this comment to see the full error message
   authors: PropTypes.instanceOf(List),
   limit: PropTypes.number,
   enableShowAll: PropTypes.bool,
@@ -87,6 +101,7 @@ AuthorList.propTypes = {
   wrapperClassName: PropTypes.string,
 };
 
+// @ts-expect-error ts-migrate(2339) FIXME: Property 'defaultProps' does not exist on type 'ty... Remove this comment to see the full error message
 AuthorList.defaultProps = {
   authors: List(),
   limit: 5,

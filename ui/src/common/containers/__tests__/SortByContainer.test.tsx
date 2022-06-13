@@ -1,5 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
+// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { Provider } from 'react-redux';
 import { fromJS } from 'immutable';
 
@@ -8,16 +9,21 @@ import {
   getStore,
   mockActionCreator,
 } from '../../../fixtures/store';
+// @ts-expect-error ts-migrate(6142) FIXME: Module '../SortByContainer' was resolved to '/User... Remove this comment to see the full error message
 import SortByContainer from '../SortByContainer';
+// @ts-expect-error ts-migrate(6142) FIXME: Module '../../components/SortBy' was resolved to '... Remove this comment to see the full error message
 import SortBy from '../../components/SortBy';
 import { LITERATURE_NS } from '../../../search/constants';
 
 import { searchQueryUpdate } from '../../../actions/search';
 
+// @ts-expect-error ts-migrate(2708) FIXME: Cannot use namespace 'jest' as a value.
 jest.mock('../../../actions/search');
 mockActionCreator(searchQueryUpdate);
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('SortByContainer', () => {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('passes namespace query sort param to SortBy', () => {
     const namespace = LITERATURE_NS;
     const store = getStoreWithState({
@@ -30,18 +36,24 @@ describe('SortByContainer', () => {
       }),
     });
     const wrapper = mount(
+      // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
       <Provider store={store}>
+        // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         <SortByContainer namespace={namespace} />
       </Provider>
     );
+    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
     expect(wrapper.find(SortBy)).toHaveProp({ sort: 'mostrecent' });
   });
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('dispatches SEARCH_QUERY_UPDATE on sort change', () => {
     const store = getStore();
     const namespace = LITERATURE_NS;
     const wrapper = mount(
+      // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
       <Provider store={store}>
+        // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         <SortByContainer namespace={namespace} />
       </Provider>
     );
@@ -49,6 +61,7 @@ describe('SortByContainer', () => {
     const sort = 'mostcited';
     onSortChange(sort);
     const expectedActions = [searchQueryUpdate(namespace, { sort, page: '1' })];
+    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
     expect(store.getActions()).toEqual(expectedActions);
   });
 });

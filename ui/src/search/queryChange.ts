@@ -1,7 +1,8 @@
 import { fetchCitationSummary } from '../actions/citations';
+// @ts-expect-error ts-migrate(6142) FIXME: Module '../literature/containers/CitationSummarySw... Remove this comment to see the full error message
 import { isCitationSummaryEnabled } from '../literature/containers/CitationSummarySwitchContainer';
 
-export function onLiteratureQueryChange(helper) {
+export function onLiteratureQueryChange(helper: any) {
   if (helper.isInitialQueryUpdate() || helper.hasQueryChanged()) {
     helper.fetchSearchResults();
     helper.updateLocation();
@@ -20,7 +21,7 @@ export function onLiteratureQueryChange(helper) {
   }
 }
 
-export function onEmbeddedLiteratureQueryChange(helper) {
+export function onEmbeddedLiteratureQueryChange(helper: any) {
   if (helper.hasQueryChanged()) {
     helper.fetchSearchResults();
   }
@@ -34,7 +35,7 @@ export function onEmbeddedLiteratureQueryChange(helper) {
   }
 }
 
-export function onEmbeddedSearchWithAggregationsQueryChange(helper) {
+export function onEmbeddedSearchWithAggregationsQueryChange(helper: any) {
   if (helper.hasQueryChanged()) {
     helper.fetchSearchResults();
   }
@@ -44,14 +45,14 @@ export function onEmbeddedSearchWithAggregationsQueryChange(helper) {
   }
 }
 
-export function onAggregationlessCollectionQueryChange(helper) {
+export function onAggregationlessCollectionQueryChange(helper: any) {
   if (helper.hasQueryChanged() || helper.isInitialQueryUpdate()) {
     helper.fetchSearchResults();
     helper.updateLocation();
   }
 }
 
-export function onJobsQueryChange(helper) {
+export function onJobsQueryChange(helper: any) {
   if (helper.isInitialQueryUpdate() || helper.hasQueryChanged()) {
     helper.fetchSearchResults();
     helper.updateLocation();
@@ -62,7 +63,7 @@ export function onJobsQueryChange(helper) {
   }
 }
 
-export function onCollectionQueryChange(helper) {
+export function onCollectionQueryChange(helper: any) {
   if (helper.isInitialQueryUpdate() || helper.hasQueryChanged()) {
     helper.fetchSearchResults();
     helper.updateLocation();
@@ -76,7 +77,7 @@ export function onCollectionQueryChange(helper) {
   }
 }
 
-export function onEmbeddedSearchWithoutAggregationsQueryChange(helper) {
+export function onEmbeddedSearchWithoutAggregationsQueryChange(helper: any) {
   if (helper.hasQueryChanged()) {
     helper.fetchSearchResults();
   }

@@ -3,9 +3,12 @@ import { shallow } from 'enzyme';
 import { fromJS, Set, List } from 'immutable';
 import { Checkbox } from 'antd';
 
+// @ts-expect-error ts-migrate(6142) FIXME: Module '../PublicationsSelectAll' was resolved to ... Remove this comment to see the full error message
 import PublicationsSelectAll from '../PublicationsSelectAll';
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('PublicationsSelectAll', () => {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('renders checked if all publications are part of the selection', () => {
     const publications = fromJS([
       {
@@ -21,20 +24,27 @@ describe('PublicationsSelectAll', () => {
     ]);
     const selection = Set([1, 2]);
     const wrapper = shallow(
+      // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
       <PublicationsSelectAll
         publications={publications}
         selection={selection}
+        // @ts-expect-error ts-migrate(2708) FIXME: Cannot use namespace 'jest' as a value.
         onChange={jest.fn()}
       />
     );
+    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
     expect(wrapper).toMatchSnapshot();
   });
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('renders disabled', () => {
+    // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
     const wrapper = shallow(<PublicationsSelectAll disabled />);
+    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
     expect(wrapper).toMatchSnapshot();
   });
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('render unchecked if all publications are not part of the selection', () => {
     const publications = fromJS([
       {
@@ -50,15 +60,19 @@ describe('PublicationsSelectAll', () => {
     ]);
     const selection = Set([2]);
     const wrapper = shallow(
+      // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
       <PublicationsSelectAll
         publications={publications}
         selection={selection}
+        // @ts-expect-error ts-migrate(2708) FIXME: Cannot use namespace 'jest' as a value.
         onChange={jest.fn()}
       />
     );
+    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
     expect(wrapper).toMatchSnapshot();
   });
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('calls onChange with publication ids when checkbox change', () => {
     const publications = fromJS([
       {
@@ -76,9 +90,11 @@ describe('PublicationsSelectAll', () => {
         },
       },
     ]);
+    // @ts-expect-error ts-migrate(2708) FIXME: Cannot use namespace 'jest' as a value.
     const onChange = jest.fn();
     const selection = Set([2]);
     const wrapper = shallow(
+      // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
       <PublicationsSelectAll
         publications={publications}
         selection={selection}
@@ -86,7 +102,9 @@ describe('PublicationsSelectAll', () => {
       />
     );
     const onCheckboxChange = wrapper.find(Checkbox).prop('onChange');
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     onCheckboxChange({ target: { checked: true } });
+    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
     expect(onChange).toHaveBeenCalledWith(
       List([1, 2]),
       List([false, false]),

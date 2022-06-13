@@ -1,6 +1,8 @@
 import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
+// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import SanitizedHTML from 'react-sanitized-html';
+// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'clas... Remove this comment to see the full error message
 import classNames from 'classnames';
 import { Alert, Button } from 'antd';
 import { Map } from 'immutable';
@@ -18,8 +20,8 @@ function Banner({
   center,
   closedBannersById,
   currentPathname,
-  pathnameRegexp,
-}) {
+  pathnameRegexp
+}: any) {
   const afterClose = useCallback(
     () => {
       onClose(id);
@@ -33,6 +35,7 @@ function Banner({
   return (
     !isClosed &&
     shouldDisplayOnCurrentPathname && (
+      // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
       <Alert
         type={type}
         banner
@@ -41,7 +44,9 @@ function Banner({
         afterClose={afterClose}
         showIcon={false}
         message={
+          // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
           <span>
+            // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             <SanitizedHTML
               className={classNames('di', { mr3: Boolean(action) })}
               allowedAttributes={ALLOWED_ATTRIBUTES_BY_TAG}
@@ -49,6 +54,7 @@ function Banner({
               html={message}
             />
             {action && (
+              // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
               <Button type="primary" target="_blank" href={action.href}>
                 {action.name}
               </Button>
@@ -75,6 +81,7 @@ Banner.propTypes = {
 
   // from container props
   onClose: PropTypes.func,
+  // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'typeof Map' is not assignable to... Remove this comment to see the full error message
   closedBannersById: PropTypes.instanceOf(Map).isRequired,
   currentPathname: PropTypes.string.isRequired,
 };

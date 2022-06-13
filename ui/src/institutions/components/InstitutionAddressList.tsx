@@ -5,15 +5,21 @@ import { List } from 'immutable';
 import InlineList, {
   SEPARATOR_MIDDLEDOT,
 } from '../../common/components/InlineList';
+// @ts-expect-error ts-migrate(6142) FIXME: Module './InstitutionAddress' was resolved to '/Us... Remove this comment to see the full error message
 import InstitutionAddress from './InstitutionAddress';
 
-function renderAddress(address) {
+function renderAddress(address: any) {
+  // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
   return <InstitutionAddress address={address} />;
 }
 
-function InstitutionAddressList({ addresses }) {
+function InstitutionAddressList({
+  addresses
+}: any) {
   return (
+    // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
     <InlineList
+      // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       wrapperClassName="di"
       items={addresses}
       // FIXME: set extractKey explictly
@@ -24,6 +30,7 @@ function InstitutionAddressList({ addresses }) {
 }
 
 InstitutionAddressList.propTypes = {
+  // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'typeof List' is not assignable t... Remove this comment to see the full error message
   addresses: PropTypes.instanceOf(List),
 };
 

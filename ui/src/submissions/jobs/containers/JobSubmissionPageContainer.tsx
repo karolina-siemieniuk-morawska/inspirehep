@@ -1,53 +1,67 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { connect } from 'react-redux';
 import { Map } from 'immutable';
+// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { Link } from 'react-router-dom';
 
 import { submit } from '../../../actions/submissions';
 import { JOBS_PID_TYPE } from '../../../common/constants';
+// @ts-expect-error ts-migrate(6142) FIXME: Module '../components/JobSubmission' was resolved ... Remove this comment to see the full error message
 import JobSubmission from '../components/JobSubmission';
 import { JOBS } from '../../../common/routes';
+// @ts-expect-error ts-migrate(6142) FIXME: Module '../../common/components/SubmissionPage' wa... Remove this comment to see the full error message
 import SubmissionPage from '../../common/components/SubmissionPage';
 
 class JobSubmissionPage extends Component {
-  constructor(props) {
+  constructor(props: any) {
     super(props);
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  async onSubmit(formData) {
+  async onSubmit(formData: any) {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'dispatch' does not exist on type 'Readon... Remove this comment to see the full error message
     const { dispatch } = this.props;
     await dispatch(submit(JOBS_PID_TYPE, formData));
   }
 
   render() {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'error' does not exist on type 'Readonly<... Remove this comment to see the full error message
     const { error } = this.props;
     return (
+      // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
       <SubmissionPage
         title="Submit a new job opening"
         description={
+          // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
           <span>
             This form allows you to advertise a new job opening. It will appear
+            // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             in the <Link to={`${JOBS}?q=`}>Jobs List</Link> upon approval.
           </span>
         }
       >
+        // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         <JobSubmission error={error} onSubmit={this.onSubmit} />
       </SubmissionPage>
     );
   }
 }
 
+// @ts-expect-error ts-migrate(2339) FIXME: Property 'propTypes' does not exist on type 'typeo... Remove this comment to see the full error message
 JobSubmissionPage.propTypes = {
   dispatch: PropTypes.func.isRequired,
+  // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'typeof Map' is not assignable to... Remove this comment to see the full error message
   error: PropTypes.instanceOf(Map),
 };
 
-const stateToProps = state => ({
-  error: state.submissions.get('submitError'),
+const stateToProps = (state: any) => ({
+  error: state.submissions.get('submitError')
 });
 
-const dispatchToProps = dispatch => ({ dispatch });
+const dispatchToProps = (dispatch: any) => ({
+  dispatch
+});
 
 export default connect(stateToProps, dispatchToProps)(JobSubmissionPage);

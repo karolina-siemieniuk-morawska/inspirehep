@@ -1,10 +1,13 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { fromJS } from 'immutable';
+// @ts-expect-error ts-migrate(6142) FIXME: Module '../RelatedRecordsList' was resolved to '/U... Remove this comment to see the full error message
 import RelatedRecordsList from '../RelatedRecordsList';
 import { INSTITUTIONS_PID_TYPE, EXPERIMENTS_PID_TYPE } from '../../constants';
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('RelatedRecordsList', () => {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('renders with multiple records', () => {
     const relatedRecords = fromJS([
       {
@@ -17,6 +20,7 @@ describe('RelatedRecordsList', () => {
       },
     ]);
     const wrapper = shallow(
+      // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
       <RelatedRecordsList
         relatedRecords={relatedRecords}
         relationType="Subsidiary"
@@ -24,8 +28,10 @@ describe('RelatedRecordsList', () => {
         pidType={INSTITUTIONS_PID_TYPE}
       />
     );
+    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
     expect(wrapper.dive()).toMatchSnapshot();
   });
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('renders with one record', () => {
     const relatedRecords = fromJS([
       {
@@ -34,6 +40,7 @@ describe('RelatedRecordsList', () => {
       },
     ]);
     const wrapper = shallow(
+      // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
       <RelatedRecordsList
         relatedRecords={relatedRecords}
         relationType="Subsidiary"
@@ -41,6 +48,7 @@ describe('RelatedRecordsList', () => {
         pidType={EXPERIMENTS_PID_TYPE}
       />
     );
+    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
     expect(wrapper.dive()).toMatchSnapshot();
   });
 });

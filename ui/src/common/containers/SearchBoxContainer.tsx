@@ -1,3 +1,4 @@
+// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { connect } from 'react-redux';
 
 import SearchBox from '../components/SearchBox';
@@ -5,21 +6,24 @@ import { searchQueryUpdate } from '../../actions/search';
 import { LITERATURE_NS } from '../../search/constants';
 import { appendQueryToLocationSearch } from '../../actions/router';
 import { clearLiteratureSelection } from '../../actions/literature';
+// @ts-expect-error ts-migrate(6142) FIXME: Module '../../literature/containers/CitationSummar... Remove this comment to see the full error message
 import { UI_CITATION_SUMMARY_PARAM } from '../../literature/containers/CitationSummarySwitchContainer';
+// @ts-expect-error ts-migrate(6142) FIXME: Module '../../literature/containers/ExcludeSelfCit... Remove this comment to see the full error message
 import { UI_EXCLUDE_SELF_CITATIONS_PARAM } from '../../literature/containers/ExcludeSelfCitationsContainer';
 
-const stateToProps = (state) => ({
+const stateToProps = (state: any) => ({
   value: state.search.getIn([
     'namespaces',
     state.search.get('searchBoxNamespace'),
     'query',
     'q',
   ]),
-  namespace: state.search.get('searchBoxNamespace'),
+
+  namespace: state.search.get('searchBoxNamespace')
 });
 
-export const dispatchToProps = (dispatch) => ({
-  onSearch(namespace, value) {
+export const dispatchToProps = (dispatch: any) => ({
+  onSearch(namespace: any, value: any) {
     if (namespace !== LITERATURE_NS) {
       dispatch(
         appendQueryToLocationSearch({
@@ -32,7 +36,7 @@ export const dispatchToProps = (dispatch) => ({
     }
 
     dispatch(searchQueryUpdate(namespace, { q: value }));
-  },
+  }
 });
 
 export default connect(stateToProps, dispatchToProps)(SearchBox);

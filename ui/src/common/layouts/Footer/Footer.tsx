@@ -20,6 +20,7 @@ import {
   INVENIO_URL,
   REPORT_METADATA_URL,
 } from '../../constants';
+// @ts-expect-error ts-migrate(2691) FIXME: An import path cannot end with a '.tsx' extension.... Remove this comment to see the full error message
 import ExternalLink from '../../components/ExternalLink.tsx';
 import { BIBLIOGRAPHY_GENERATOR } from '../../routes';
 
@@ -85,6 +86,7 @@ const COLUMNS = [
         openExternal: true,
       },
       {
+        // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         title: <span>Bibliography generator</span>,
         url: BIBLIOGRAPHY_GENERATOR,
         openExternal: false,
@@ -114,27 +116,36 @@ const COLUMNS = [
 ];
 
 const BOTTOM = (
+  // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
   <Row>
+    // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
     <Col className="tl sm-tc" xs={24} md={12}>
+      // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
       <ExternalLink href={INVENIO_URL}>Powered by Invenio</ExternalLink>
     </Col>
+    // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
     <Col className="tr sm-tc" xs={24} md={12}>
+      // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
       Made with <span className="red">❤</span> by the INSPIRE Team
     </Col>
   </Row>
 );
 
-function Footer({ isCatalogerLoggedIn }) {
+function Footer({
+  isCatalogerLoggedIn
+}: any) {
   const columns = useMemo(
     () =>
       isCatalogerLoggedIn
         ? COLUMNS
         : COLUMNS.map((col) => ({
             ...col,
-            items: col.items.filter((item) => !item.onlyCatalogers),
+            // @ts-expect-error ts-migrate(2349) FIXME: This expression is not callable.
+            items: col.items.filter((item: any) => !item.onlyCatalogers),
           })),
     [isCatalogerLoggedIn]
   );
+  // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
   return <RcFooter className="__Footer__" bottom={BOTTOM} columns={columns} />;
 }
 

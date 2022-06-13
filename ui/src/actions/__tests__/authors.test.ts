@@ -3,6 +3,7 @@ import { fromJS, Set } from 'immutable';
 import { advanceTo, clear } from 'jest-date-mock';
 
 import { getStore, mockActionCreator } from '../../fixtures/store';
+// @ts-expect-error ts-migrate(2691) FIXME: An import path cannot end with a '.ts' extension. ... Remove this comment to see the full error message
 import http from '../../common/http.ts';
 import {
   AUTHOR_ERROR,
@@ -38,23 +39,30 @@ import {
   assignSuccessOwnProfile,
   assignSuccessDifferentProfileClaimedPapers,
   assignSuccessDifferentProfileUnclaimedPapers,
+// @ts-expect-error ts-migrate(6142) FIXME: Module '../../authors/assignNotification' was reso... Remove this comment to see the full error message
 } from '../../authors/assignNotification';
 
 import { AUTHOR_PUBLICATIONS_NS } from '../../search/constants';
 
+// @ts-expect-error ts-migrate(2708) FIXME: Cannot use namespace 'jest' as a value.
 jest.mock('../../authors/assignNotification');
+// @ts-expect-error ts-migrate(2708) FIXME: Cannot use namespace 'jest' as a value.
 jest.mock('../search');
 mockActionCreator(searchQueryUpdate);
 
 const mockHttp = new MockAdapter(http.httpClient);
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('AUTHOR - async action creators', () => {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('fetch author', () => {
+    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'afterEach'.
     afterEach(() => {
       mockHttp.reset();
     });
 
-    it('creates AUTHOR_SUCCESS', async (done) => {
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
+    it('creates AUTHOR_SUCCESS', async (done: any) => {
       mockHttp.onGet('/authors/123').replyOnce(200, { foo: 'bar' });
 
       const expectedActions = [
@@ -64,11 +72,13 @@ describe('AUTHOR - async action creators', () => {
 
       const store = getStore();
       await store.dispatch(fetchAuthor(123));
+      // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
       expect(store.getActions()).toEqual(expectedActions);
       done();
     });
 
-    it('creates AUTHOR_ERROR', async (done) => {
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
+    it('creates AUTHOR_ERROR', async (done: any) => {
       mockHttp.onGet('/authors/123').replyOnce(500, { message: 'Error' });
 
       const expectedActions = [
@@ -87,12 +97,15 @@ describe('AUTHOR - async action creators', () => {
 
       const store = getStore();
       await store.dispatch(fetchAuthor(123));
+      // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
       expect(store.getActions()).toEqual(expectedActions);
       done();
     });
   });
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('select publication', () => {
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('setPublicationSelection', () => {
       const expectedActions = [
         {
@@ -103,9 +116,11 @@ describe('AUTHOR - async action creators', () => {
 
       const store = getStore();
       store.dispatch(setPublicationSelection([1, 2], true));
+      // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
       expect(store.getActions()).toEqual(expectedActions);
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('setPublicationClaimedSelection', () => {
       const expectedActions = [
         {
@@ -119,9 +134,11 @@ describe('AUTHOR - async action creators', () => {
 
       const store = getStore();
       store.dispatch(setPublicationsClaimedSelection([1, 2], true));
+      // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
       expect(store.getActions()).toEqual(expectedActions);
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('setPublicationsCanNotClaimSelection', () => {
       const expectedActions = [
         {
@@ -135,9 +152,11 @@ describe('AUTHOR - async action creators', () => {
 
       const store = getStore();
       store.dispatch(setPublicationsCanNotClaimSelection([1, 2], true));
+      // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
       expect(store.getActions()).toEqual(expectedActions);
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('clearPublicationSelection', () => {
       const expectedActions = [
         {
@@ -147,9 +166,11 @@ describe('AUTHOR - async action creators', () => {
 
       const store = getStore();
       store.dispatch(clearPublicationSelection());
+      // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
       expect(store.getActions()).toEqual(expectedActions);
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('clearPublicationsClaimedSelection', () => {
       const expectedActions = [
         {
@@ -159,10 +180,12 @@ describe('AUTHOR - async action creators', () => {
 
       const store = getStore();
       store.dispatch(clearPublicationsClaimedSelection());
+      // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
       expect(store.getActions()).toEqual(expectedActions);
     });
   });
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('clearPublicationsCanNotClaimSelection', () => {
     const expectedActions = [
       {
@@ -172,14 +195,18 @@ describe('AUTHOR - async action creators', () => {
 
     const store = getStore();
     store.dispatch(clearPublicationsCanNotClaimSelection());
+    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
     expect(store.getActions()).toEqual(expectedActions);
   });
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('assignPapers', () => {
+    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'afterEach'.
     afterEach(() => {
       clear();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('successful with stub author', async () => {
       const stubAuthorId = 5555;
       const fromAuthorId = 123;
@@ -210,11 +237,14 @@ describe('AUTHOR - async action creators', () => {
       const dispatchPromise = store.dispatch(
         assignPapers({ from: fromAuthorId })
       );
+      // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
       expect(assigning).toHaveBeenCalled();
 
       await dispatchPromise;
+      // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
       expect(store.getActions()).toEqual(expectedActions);
 
+      // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
       expect(assignSuccess).toHaveBeenCalledWith({
         from: fromAuthorId,
         to: stubAuthorId,
@@ -222,6 +252,7 @@ describe('AUTHOR - async action creators', () => {
       });
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('successful without stub author', async () => {
       const toAuthorId = 321;
       const fromAuthorId = 123;
@@ -253,11 +284,14 @@ describe('AUTHOR - async action creators', () => {
       const dispatchPromise = store.dispatch(
         assignPapers({ from: fromAuthorId, to: toAuthorId })
       );
+      // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
       expect(assigning).toHaveBeenCalled();
 
       await dispatchPromise;
+      // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
       expect(store.getActions()).toEqual(expectedActions);
 
+      // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
       expect(assignSuccess).toHaveBeenCalledWith({
         from: fromAuthorId,
         to: toAuthorId,
@@ -265,6 +299,7 @@ describe('AUTHOR - async action creators', () => {
       });
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('error', async () => {
       const toAuthorId = 321;
       const fromAuthorId = 123;
@@ -284,24 +319,30 @@ describe('AUTHOR - async action creators', () => {
         })
         .replyOnce(500, {});
 
-      const expectedActions = [];
+      const expectedActions: any = [];
 
       const dispatchPromise = store.dispatch(
         assignPapers({ from: fromAuthorId, to: toAuthorId })
       );
+      // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
       expect(assigning).toHaveBeenCalled();
 
       await dispatchPromise;
+      // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
       expect(store.getActions()).toEqual(expectedActions);
 
+      // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
       expect(assignError).toHaveBeenCalled();
     });
   });
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('assignOwnPapers when assigning to own profile', () => {
+    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'afterEach'.
     afterEach(() => {
       clear();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('successful', async () => {
       const stubAuthorId = 5555;
       const fromAuthorId = 123;
@@ -337,11 +378,14 @@ describe('AUTHOR - async action creators', () => {
       const dispatchPromise = store.dispatch(
         assignOwnPapers({ from: fromAuthorId, isUnassignAction: false })
       );
+      // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
       expect(assigning).toHaveBeenCalled();
 
       await dispatchPromise;
+      // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
       expect(store.getActions()).toEqual(expectedActions);
 
+      // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
       expect(assignSuccessOwnProfile).toHaveBeenCalledWith({
         numberOfClaimedPapers: 2,
         numberOfUnclaimedPapers: 1,
@@ -349,16 +393,19 @@ describe('AUTHOR - async action creators', () => {
     });
   });
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('assignOwnPapers when unassigning own profile', () => {
+    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'afterEach'.
     afterEach(() => {
       clear();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('successful', async () => {
       const stubAuthorId = 5555;
       const fromAuthorId = 123;
       const publicationSelection = [1, 2, 3];
-      const publicationSelectionClaimed = [];
+      const publicationSelectionClaimed: any = [];
       const publicationSelectionUnclaimed = [1, 2, 3];
       const fakeNow = 1597314028798;
 
@@ -389,19 +436,25 @@ describe('AUTHOR - async action creators', () => {
       const dispatchPromise = store.dispatch(
         assignOwnPapers({ from: fromAuthorId, isUnassignAction: true })
       );
+      // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
       expect(assigning).toHaveBeenCalled();
 
       await dispatchPromise;
+      // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
       expect(store.getActions()).toEqual(expectedActions);
 
+      // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
       expect(unassignSuccessOwnProfile).toHaveBeenCalled();
     });
   });
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('assignDifferentProfileClaimedPapers', () => {
+    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'afterEach'.
     afterEach(() => {
       clear();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('successful', async () => {
       const toAuthorId = 5555;
       const fromAuthorId = 123;
@@ -440,13 +493,17 @@ describe('AUTHOR - async action creators', () => {
           to: toAuthorId,
         })
       );
+      // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
       expect(assigning).toHaveBeenCalled();
 
       await dispatchPromise;
+      // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
       expect(store.getActions()).toEqual(expectedActions);
+      // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
       expect(assignSuccessDifferentProfileClaimedPapers).toHaveBeenCalled();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('successful for stub from author', async () => {
       const toAuthorId = 5555;
       const fromAuthorId = 123;
@@ -485,24 +542,30 @@ describe('AUTHOR - async action creators', () => {
           to: toAuthorId,
         })
       );
+      // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
       expect(assigning).toHaveBeenCalled();
 
       await dispatchPromise;
+      // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
       expect(store.getActions()).toEqual(expectedActions);
+      // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
       expect(assignSuccessDifferentProfileUnclaimedPapers).toHaveBeenCalled();
     });
   });
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('assignDifferentProfileUnclaimedPapers', () => {
+    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'afterEach'.
     afterEach(() => {
       clear();
     });
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('successful', async () => {
       const toAuthorId = 5555;
       const fromAuthorId = 123;
       const publicationSelectionUnclaimed = [1, 2];
-      const publicationSelectionClaimed = [];
+      const publicationSelectionClaimed: any = [];
       const fakeNow = 1597314028798;
 
       advanceTo(fakeNow);
@@ -534,11 +597,14 @@ describe('AUTHOR - async action creators', () => {
           to: toAuthorId,
         })
       );
+      // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
       expect(assigning).toHaveBeenCalled();
 
       await dispatchPromise;
+      // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
       expect(store.getActions()).toEqual(expectedActions);
 
+      // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
       expect(assignSuccessDifferentProfileUnclaimedPapers).toHaveBeenCalled();
     });
   });

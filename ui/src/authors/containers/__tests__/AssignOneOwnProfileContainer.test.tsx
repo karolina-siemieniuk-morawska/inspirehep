@@ -1,8 +1,10 @@
 import React from 'react';
 import { mount } from 'enzyme';
+// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { Provider } from 'react-redux';
 
 import { getStore, mockActionCreator } from '../../../fixtures/store';
+// @ts-expect-error ts-migrate(6142) FIXME: Module '../AssignOneOwnProfileContainer' was resol... Remove this comment to see the full error message
 import AssignOneOwnProfileContainer from '../AssignOneOwnProfileContainer';
 
 import {
@@ -14,14 +16,18 @@ import {
   setPublicationsUnclaimedSelection,
   clearPublicationsUnclaimedSelection,
 } from '../../../actions/authors';
+// @ts-expect-error ts-migrate(6142) FIXME: Module '../../components/AssignOwnProfileAction' w... Remove this comment to see the full error message
 import AssignOwnProfileAction from '../../components/AssignOwnProfileAction';
 
+// @ts-expect-error ts-migrate(2708) FIXME: Cannot use namespace 'jest' as a value.
 jest.mock('react-router-dom', () => ({
+  // @ts-expect-error ts-migrate(2708) FIXME: Cannot use namespace 'jest' as a value.
   useParams: jest.fn().mockImplementation(() => ({
     id: 123,
   })),
 }));
 
+// @ts-expect-error ts-migrate(2708) FIXME: Cannot use namespace 'jest' as a value.
 jest.mock('../../../actions/authors');
 mockActionCreator(assignOwnPapers);
 mockActionCreator(setPublicationsClaimedSelection);
@@ -31,7 +37,9 @@ mockActionCreator(clearPublicationSelection);
 mockActionCreator(setPublicationsUnclaimedSelection);
 mockActionCreator(clearPublicationsUnclaimedSelection);
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('AssignOneOwnProfileActionContainer', () => {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('selects the one paper and dispatches assignPapers when paper unclaimed', () => {
     const store = getStore();
     const paperRecordId = 12345;
@@ -40,7 +48,9 @@ describe('AssignOneOwnProfileActionContainer', () => {
     const isUnassignAction = true;
     const disabledAssignAction = false;
     const wrapper = mount(
+      // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
       <Provider store={store}>
+        // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         <AssignOneOwnProfileContainer
           recordId={paperRecordId}
           disabledAssignAction={disabledAssignAction}
@@ -58,8 +68,10 @@ describe('AssignOneOwnProfileActionContainer', () => {
       setPublicationsUnclaimedSelection([paperRecordId], true),
       assignOwnPapers({ from, to, isUnassignAction }),
     ];
+    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
     expect(store.getActions()).toEqual(expectedActions);
   });
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('selects the one paper and dispatches assignPapers when paper claimed', () => {
     const store = getStore();
     const paperRecordId = 12345;
@@ -68,7 +80,9 @@ describe('AssignOneOwnProfileActionContainer', () => {
     const isUnassignAction = true;
     const disabledAssignAction = true;
     const wrapper = mount(
+      // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
       <Provider store={store}>
+        // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         <AssignOneOwnProfileContainer
           recordId={paperRecordId}
           disabledAssignAction={disabledAssignAction}
@@ -86,6 +100,7 @@ describe('AssignOneOwnProfileActionContainer', () => {
       setPublicationsClaimedSelection([paperRecordId], true),
       assignOwnPapers({ from, to, isUnassignAction }),
     ];
+    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
     expect(store.getActions()).toEqual(expectedActions);
   });
 });

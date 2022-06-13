@@ -1,6 +1,7 @@
 import React from 'react';
 import { Table } from 'antd';
 
+// @ts-expect-error ts-migrate(6142) FIXME: Module './LinkWithEncodedLiteratureQuery' was reso... Remove this comment to see the full error message
 import LinkWithEncodedLiteratureQuery from './LinkWithEncodedLiteratureQuery';
 
 const TABLE_COLUMNS = [
@@ -15,7 +16,8 @@ const TABLE_COLUMNS = [
   {
     title: 'Example',
     dataIndex: 'example',
-    render: query => <LinkWithEncodedLiteratureQuery query={query} />,
+    // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
+    render: (query: any) => <LinkWithEncodedLiteratureQuery query={query} />,
   },
 ];
 
@@ -54,6 +56,7 @@ const TABLE_DATA = [
 
 function SpiresExamples() {
   return (
+    // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
     <Table
       bordered
       size="small"

@@ -11,7 +11,10 @@ import {
   DATE_RANGE_FORMAT,
 } from '../constants';
 
-function DateRangeFilter({ onChange, range = '' }) {
+function DateRangeFilter({
+  onChange,
+  range = ''
+}: any) {
   const [startDate = '', endDate = ''] = useMemo(
     () => range.split(RANGE_AGGREGATION_SELECTION_SEPARATOR),
     [range]
@@ -72,9 +75,13 @@ function DateRangeFilter({ onChange, range = '' }) {
   );
 
   return (
+    // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
     <div>
+      // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
       <Row className="mb1">From:</Row>
+      // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
       <Row className="mb2">
+        // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         <DatePicker
           data-test-id="start-date-picker"
           format={DATE_RANGE_FORMAT}
@@ -84,8 +91,11 @@ function DateRangeFilter({ onChange, range = '' }) {
           disabledDate={isLaterThanEndDate}
         />
       </Row>
+      // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
       <Row className="mb1">To:</Row>
+      // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
       <Row>
+        // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         <DatePicker
           data-test-id="end-date-picker"
           format={DATE_RANGE_FORMAT}

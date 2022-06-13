@@ -10,9 +10,9 @@ function PublicationsSelect({
   claimed,
   canClaim,
   disabled,
-  checked,
-}) {
-  const onChange = (event) => {
+  checked
+}: any) {
+  const onChange = (event: any) => {
     onSelectPapers(event);
     if (!canClaim) {
       onSelectPapersUserCanNotClaim(event);
@@ -24,6 +24,7 @@ function PublicationsSelect({
     }
   };
   return (
+    // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
     <Checkbox
       onChange={(event) => {
         onChange(event);

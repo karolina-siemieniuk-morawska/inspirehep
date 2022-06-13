@@ -2,10 +2,14 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { fromJS } from 'immutable';
 
+// @ts-expect-error ts-migrate(6142) FIXME: Module '../ReferenceList' was resolved to '/Users/... Remove this comment to see the full error message
 import ReferenceList from '../ReferenceList';
+// @ts-expect-error ts-migrate(6142) FIXME: Module '../../../common/components/ListWithPaginat... Remove this comment to see the full error message
 import ListWithPagination from '../../../common/components/ListWithPagination';
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('ReferenceList', () => {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('renders with references', () => {
     const references = fromJS([
       {
@@ -16,18 +20,22 @@ describe('ReferenceList', () => {
       },
     ]);
     const wrapper = shallow(
+      // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
       <ReferenceList
         loading={false}
         error={null}
         references={references}
         total={1}
+        // @ts-expect-error ts-migrate(2708) FIXME: Cannot use namespace 'jest' as a value.
         onQueryChange={jest.fn()}
         query={{ size: 25, page: 1 }}
       />
     );
+    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
     expect(wrapper).toMatchSnapshot();
   });
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('renders items with (page * index) key if title is absent', () => {
     const references = fromJS([
       {
@@ -38,21 +46,27 @@ describe('ReferenceList', () => {
       },
     ]);
     const wrapper = shallow(
+      // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
       <ReferenceList
         loading={false}
         error={null}
         references={references}
         total={1}
+        // @ts-expect-error ts-migrate(2708) FIXME: Cannot use namespace 'jest' as a value.
         onQueryChange={jest.fn()}
         query={{ size: 25, page: 1 }}
       />
     );
+    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
     expect(wrapper).toMatchSnapshot();
   });
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('calls onQueryChange and sets the correct page', () => {
+    // @ts-expect-error ts-migrate(2708) FIXME: Cannot use namespace 'jest' as a value.
     const onQueryChange = jest.fn();
     const wrapper = shallow(
+      // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
       <ReferenceList
         loading={false}
         error={null}
@@ -66,44 +80,57 @@ describe('ReferenceList', () => {
     const onListPageChange = wrapper
       .find(ListWithPagination)
       .prop('onPageChange');
+    // @ts-expect-error ts-migrate(2571) FIXME: Object is of type 'unknown'.
     onListPageChange(page);
+    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
     expect(onQueryChange).toHaveBeenCalledWith({
       page,
     });
   });
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('does not render the list if total 0', () => {
     const wrapper = shallow(
+      // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
       <ReferenceList
         loading={false}
         error={null}
         references={fromJS([{ titles: [{ title: 'Reference 1' }] }])}
         total={0}
+        // @ts-expect-error ts-migrate(2708) FIXME: Cannot use namespace 'jest' as a value.
         onQueryChange={jest.fn()}
         query={{ size: 25, page: 1 }}
       />
     );
+    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
     expect(wrapper).toMatchSnapshot();
   });
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('renders with error', () => {
     const wrapper = shallow(
+      // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
       <ReferenceList
         loading={false}
         error={fromJS({ message: 'error' })}
         references={fromJS([])}
         total={0}
+        // @ts-expect-error ts-migrate(2708) FIXME: Cannot use namespace 'jest' as a value.
         onQueryChange={jest.fn()}
         query={{ size: 25, page: 1 }}
       />
     );
+    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
     expect(wrapper).toMatchSnapshot();
   });
 });
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
 it('calls onQueryChange and sets display to 50 references/page', () => {
+  // @ts-expect-error ts-migrate(2708) FIXME: Cannot use namespace 'jest' as a value.
   const onQueryChange = jest.fn();
   const wrapper = shallow(
+    // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
     <ReferenceList
       loading={false}
       error={null}
@@ -118,7 +145,9 @@ it('calls onQueryChange and sets display to 50 references/page', () => {
   const onListPageSizeChange = wrapper
     .find(ListWithPagination)
     .prop('onSizeChange');
+  // @ts-expect-error ts-migrate(2571) FIXME: Object is of type 'unknown'.
   onListPageSizeChange(page, size);
+  // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'expect'.
   expect(onQueryChange).toHaveBeenCalledWith({
     page,
     size,
