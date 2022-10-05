@@ -238,7 +238,7 @@ describe('literature - async action creators', () => {
       const store = getStore();
 
       mockHttp
-        .onPost('/assign/literature/assign', {
+        .onPost('/assign/literature/assign-different-profile', {
           from_author_recid: from,
           to_author_recid: to,
           literature_ids: [literatureId],
@@ -265,7 +265,7 @@ describe('literature - async action creators', () => {
       const store = getStore();
 
       mockHttp
-        .onPost('/assign/literature/assign', {
+        .onPost('/assign/literature/assign-different-profile', {
           from_author_recid: from,
           to_author_recid: to,
           literature_ids: paperId,

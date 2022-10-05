@@ -166,7 +166,7 @@ export function assignLiteratureItem({ from, to, literatureId }) {
     try {
       assigning(ASSIGNING_NOTIFICATION_LITERATURE_ITEM_KEY);
       const { data } = await http
-        .post('/assign/literature/assign', {
+        .post('/assign/literature/assign-different-profile', {
           from_author_recid: from,
           to_author_recid: to,
           literature_ids: [literatureId],
