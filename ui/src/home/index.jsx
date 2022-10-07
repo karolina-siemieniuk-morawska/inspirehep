@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col } from 'antd';
+import { Row, Col, Card } from 'antd';
 
 import SearchBoxContainer from '../common/containers/SearchBoxContainer';
 import HowToSearch from './components/HowToSearch';
@@ -27,9 +27,41 @@ function Home() {
           >
             <SearchBoxContainer />
           </HomePageSection>
+          <HomePageSection className="bg-white">
+            <CollaborationLogos />
+          </HomePageSection>
+          <HomePageSection>
+            <Row justify="center">
+              <Col className="pa3" span={6}>
+                <Card
+                  title='ATLAS Experiment releases 13 TeV Open Data for Science Education'
+                >
+                  The ATLAS Collaboration at CERN has just released the first open dataset from the Large Hadron Collider’s (LHC) highest-energy run at 13 teraelectronvolts (TeV). The new release is specially developed for science education, underlining the Collaboration’s long-standing commitment to students and teachers using open-access ATLAS data and related tools.
+                </Card>
+              </Col>
+              <Col className="pa3" span={6}>
+                <Card
+                  title='ATLAS Experiment releases 13 TeV Open Data for Science Education'
+                >
+                  The ATLAS Collaboration at CERN has just released the first open dataset from the Large Hadron Collider’s (LHC) highest-energy run at 13 teraelectronvolts (TeV). The new release is specially developed for science education, underlining the Collaboration’s long-standing commitment to students and teachers using open-access ATLAS data and related tools.
+                </Card>
+              </Col>
+              <Col className="pa3" span={6}>
+                <Card
+                  title='ATLAS Experiment releases 13 TeV Open Data for Science Education'
+                >
+                  The ATLAS Collaboration at CERN has just released the first open dataset from the Large Hadron Collider’s (LHC) highest-energy run at 13 teraelectronvolts (TeV). The new release is specially developed for science education, underlining the Collaboration’s long-standing commitment to students and teachers using open-access ATLAS data and related tools.
+                </Card>
+              </Col>
+            </Row>
+            <Row justify="center">
+              <a className="tc f5 mt3" href="https://opendata.cern.ch/">View all</a>
+            </Row>
+          </HomePageSection>
           <HomePageSection
-            className="bg-white"
             title="How to Search"
+            id="how-to-search"
+            className="bg-white"
             description="INSPIRE supports the most popular SPIRES syntax operators and free text searches for searching papers."
           >
             <HowToSearch />
@@ -39,9 +71,6 @@ function Home() {
             description="INSPIRE systematically adds content from various sources. Anyone can also submit new content by logging in with their ORCID."
           >
             <HowToSubmit />
-          </HomePageSection>
-          <HomePageSection className="bg-white" title="INSPIRE Collaboration">
-            <CollaborationLogos />
           </HomePageSection>
         </Col>
       </Row>

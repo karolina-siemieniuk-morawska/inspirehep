@@ -6,7 +6,7 @@ import ExternalLink from '../../../common/components/ExternalLink.tsx';
 function CollaborationLogo({ href, name, src }) {
   return (
     <ExternalLink href={href}>
-      <img height={60} src={src} alt={name} />
+      <img height={40} src={src} alt={name} />
     </ExternalLink>
   );
 }

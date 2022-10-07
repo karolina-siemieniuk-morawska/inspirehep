@@ -1,4 +1,5 @@
 import React, { useCallback, useState, useEffect } from 'react';
+import { HashLink as Link } from 'react-router-hash-link';
 import PropTypes from 'prop-types';
 import { Input, AutoComplete } from 'antd';
 import { HistoryOutlined } from '@ant-design/icons';
@@ -78,29 +79,40 @@ function SearchBox({ value, placeholder, onSearch, namespace, className }) {
     // HACK: autocomplete select and scope select interferes with each other
     // when search scope is rendered using `Input.addonBefore` prop, inside autocomplete
     // that's why it's pulled out, and classNames are set manually to make it look like an addon
-    <span className={classNames('__SearchBox__ ant-input-group', className)}>
-      <span className="ant-input-group-addon">
-        <SearchScopeSelectContainer />
+    <>
+      <span className={classNames('__SearchBox__ ant-input-group', className)}>
+        <span className="ant-input-group-addon">
+          <SearchScopeSelectContainer />
+        </span>
+        <AutoComplete
+          autoFocus
+          dropdownClassName="header-dropdown"
+          className="autocomplete"
+          value={inputValue}
+          dropdownMatchSelectWidth
+          options={autoCompleteOptions}
+          onSelect={onAutoCompleteSelect}
+        >
+          <Input.Search
+            data-test-id="search-box-input"
+            placeholder={placeholder}
+            size="large"
+            enterButton
+            onChange={onInputChange}
+            onSearch={onInputSearch}
+          />
+        </AutoComplete>
       </span>
-      <AutoComplete
-        autoFocus
-        dropdownClassName="header-dropdown"
-        className="autocomplete"
-        value={inputValue}
-        dropdownMatchSelectWidth
-        options={autoCompleteOptions}
-        onSelect={onAutoCompleteSelect}
-      >
-        <Input.Search
-          data-test-id="search-box-input"
-          placeholder={placeholder}
-          size="large"
-          enterButton
-          onChange={onInputChange}
-          onSearch={onInputSearch}
-        />
-      </AutoComplete>
-    </span>
+
+      <div className="tc f5 mt4">
+        <Link
+          to="#how-to-search"
+          scroll={(el) => el.scrollIntoView({ block: 'center', behavior: 'smooth' })}
+        >
+          How to search?
+        </Link>
+      </div>
+    </>
   );
 }
 

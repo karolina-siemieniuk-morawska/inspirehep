@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Row, Col } from 'antd';
 
-function HomePageSection({ title, description, children, className }) {
+function HomePageSection({ title, description, children, className, id }) {
   return (
-    <Row className={classNames('pv4 ph2', className)} justify="center">
+    <Row className={classNames('pv4 ph2', className)} id={id} justify="center" >
       <Col>
-        <h2 className="tc f2 sm-f4">{title}</h2>
+        {title && <h2 className="tc f2 sm-f4">{title}</h2>}
         {description && <p className="tc">{description}</p>}
-        <div className="mt5">{children}</div>
+        <div className={title && "mt5"}>{children}</div>
       </Col>
     </Row>
   );
