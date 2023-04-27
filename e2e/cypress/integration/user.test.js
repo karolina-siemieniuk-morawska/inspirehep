@@ -64,4 +64,33 @@ describe('user', () => {
       cy.matchSnapshots('SessionTimeout');
     });
   });
+
+  it.only('signs up to the application', () => {
+    const email = `cataloger@inspirehep.net`;
+
+    cy.visit('/user/signup');
+    cy.intercept('POST', '/api/accounts/signup', {
+      statusCode: 200,
+      body: {
+        allow_orcid_push: false,
+        email,
+        orcid: "0009-0005-9645-6700",
+        profile_control_number: null,
+        roles: []
+      },
+    }).as('getSignUpSuccess');
+
+    cy.get('[data-test-id=email]')
+      .type(email)
+      .get('[data-testid="submit"]')
+      .click();
+
+    cy.wait('@getSignUpSuccess').then(() => {
+      cy.registerRoute({
+        url: '/api/accounts/me',
+        method: 'GET',
+      });
+      cy.waitForRoute('/api/accounts/me').its('status').should('equal', 200);
+    });
+  });
 });
