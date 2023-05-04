@@ -65,7 +65,7 @@ describe('user', () => {
     });
   });
 
-  it('signs up to the application', () => {
+  it.only('signs up to the application', () => {
     const email = `cataloger@inspirehep.net`;
 
     cy.visit('/user/signup');
@@ -91,7 +91,7 @@ describe('user', () => {
     });
   });
 
-  it.only('shows error when sign up to the application was unsuccessfull', () => {
+  it('shows error when sign up to the application was unsuccessfull', () => {
     const email = `cataloger@inspirehep.net`;
 
     cy.visit('/user/signup');
