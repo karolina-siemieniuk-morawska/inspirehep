@@ -12,7 +12,7 @@ const SignUpPage: React.FC<{
   ) => void | Promise<any>) &
     Function;
   loading: boolean;
-  error?: { message: string };
+  error?: any;
 }> = ({ onSignUp, loading, error }) => {
   return (
     <>
@@ -31,7 +31,12 @@ const SignUpPage: React.FC<{
           {error && (
             <Row className="mb3" data-testid={error.message}>
               <Col>
-                <Alert message={error.message} type="error" showIcon closable />
+                <Alert
+                  message="Something went wrong during sign up. Try again later."
+                  type="error"
+                  showIcon
+                  closable
+                />
               </Col>
             </Row>
           )}

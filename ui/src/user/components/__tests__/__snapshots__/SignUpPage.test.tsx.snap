@@ -94,7 +94,6 @@ exports[`SignUpPage renders page with errors 1`] = `
         </p>
         <div
           class="ant-row mb3"
-          data-testid="This is an error yo"
         >
           <div
             class="ant-col"
@@ -129,7 +128,7 @@ exports[`SignUpPage renders page with errors 1`] = `
                 <div
                   class="ant-alert-message"
                 >
-                  This is an error yo
+                  Something went wrong during sign up. Try again later.
                 </div>
               </div>
               <button

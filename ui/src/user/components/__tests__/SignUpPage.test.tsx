@@ -18,11 +18,8 @@ describe('SignUpPage', () => {
   });
 
   it('renders page with errors', () => {
-    const error = {
-      message: 'This is an error yo',
-    };
     const { asFragment } = render(
-      <SignUpPage loading={false} error={error} onSignUp={jest.fn()} />
+      <SignUpPage loading={false} error onSignUp={jest.fn()} />
     );
 
     expect(asFragment()).toMatchSnapshot();
