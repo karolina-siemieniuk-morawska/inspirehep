@@ -65,7 +65,7 @@ describe('user', () => {
     });
   });
 
-  it.only('signs up to the application', () => {
+  it('signs up to the application', () => {
     const email = `cataloger@inspirehep.net`;
 
     cy.visit('/user/signup');
@@ -86,11 +86,24 @@ describe('user', () => {
       .click();
 
     cy.wait('@getSignUpSuccess').then(() => {
-      cy.registerRoute({
-        url: '/api/accounts/me',
-        method: 'GET',
-      });
+      cy.request('GET', '/api/accounts/me');
       cy.waitForRoute('/api/accounts/me').its('status').should('equal', 200);
     });
+  });
+
+  it.only('shows error when sign up to the application was unsuccessfull', () => {
+    const email = `cataloger@inspirehep.net`;
+
+    cy.visit('/user/signup');
+
+    cy.get('[data-test-id=email]')
+      .type(email)
+      .get('[data-testid="submit"]')
+      .click();
+
+    cy.get('.ant-alert-error').should(
+      'have.text',
+      'Something went wrong during sign up. Try again later.'
+    );
   });
 });
