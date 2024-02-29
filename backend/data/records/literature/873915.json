@@ -614,6 +614,19 @@
             "conference_record": {
                 "$ref": "https://inspirebeta.net/api/conferences/980531"
             }
+        },
+        {
+            "year": 2010,
+            "artid": "264",
+            "page_start": "264",
+            "journal_title": "PoS",
+            "journal_record": {
+                "$ref": "https://inspirebeta.net/api/journals/1213080"
+            },
+            "journal_volume": "LATTICE2010",
+            "parent_record": {
+                "$ref": "https://inspirebeta.net/api/literature/918185"
+            }
         }
     ],
     "inspire_categories": [
